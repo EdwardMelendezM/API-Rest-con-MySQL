@@ -1,24 +1,27 @@
-'use strict';
+'use strict'
 
 var conn = require('./movie-connection'),
-    MovieModel = () => {
+    MovieModel = () => { }
 
-    }
+MovieModel.getAll = (cb) => conn.query('SELECT * FROM movie', cb)
 
-MovieModel.getAll = (cb) => {
-    conn.query('SELECT * FROM movie', cb)
+MovieModel.getOne = (id, cb) => conn.query('SELECT * FROM movie WHERE movie_id = ?', id, cb)
+
+MovieModel.save = (data, cb) => {
+    conn.query('SELECT * FROM movie WHERE movie_id = ?', data.movie_id, (err, rows) => {
+        console.log(`Número de registros: ${rows.length}`)
+
+        if (err) {
+            return err
+        }
+        else {
+            return (rows.length == 1)
+                ? conn.query('UPDATE movie SET ? WHERE movie_id = ?', [data, data.movie_id], cb)
+                : conn.query('INSERT INTO movie SET ?', data, cb)
+        }
+    })
 }
-MovieModel.insert = () => {
 
-}
-MovieModel.getOne = () => {
+MovieModel.delete = (id, cb) => conn.query('DELETE FROM movie WHERE movie_id = ?', id, cb)
 
-}
-MovieModel.upadte = () => {
-
-}
-MovieModel.delete = () => {
-
-}
-
-module.exports = MovieModel; 
+module.exports = MovieModel

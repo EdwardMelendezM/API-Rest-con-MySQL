@@ -10,9 +10,11 @@ var mysql = require('mysql'),
         database: conf.mysql.db
     },
     myConn = mysql.createConnection(dbOptions)
+
 myConn.connect((err) => {
-    return (err) ? console.log(`Error al conectar a mysql ${err.stack}`)
-        : console.log(`Conexion establecida con MySql N° ${myConn.threadId}`)
-});
+    return (err) ? console.log(`Error al Conectarse a MySQL: ${err.stack}`) : console.log(`Conexión establecida con MySQL N°: ${myConn.threadId}`)
+})
+
+//console.log(conf.mysql.db)
 
 module.exports = myConn

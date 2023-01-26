@@ -4,7 +4,7 @@ var express = require('express'),
     favicon = require('serve-favicon'),
     bodyParser = require('body-parser'),
     morgan = require('morgan'),
-    restFull = require('express-method-override')('_method'),
+    restFul = require('express-method-override')('_method'),
     routes = require('./routes/movie-router'),
     faviconURL = `${__dirname}/public/img/node-favicon.png`,
     publicDir = express.static(`${__dirname}/public`),
@@ -22,7 +22,7 @@ app
     .use(bodyParser.json())
     // parse application/x-www-form-urlencoded
     .use(bodyParser.urlencoded({ extended: false }))
-    .use(restFull)
+    .use(restFul)
     .use(morgan('dev'))
     .use(publicDir)
     .use(routes)
